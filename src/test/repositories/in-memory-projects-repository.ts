@@ -39,4 +39,7 @@ export class InMemoryProjectsRepository implements ProjectsRepository {
 			this.items.splice(projectIndex, 1);
 		}
 	}
+	async fetchProjects(): Promise<Project[] | []> {
+		return this.items;
+	}
 }

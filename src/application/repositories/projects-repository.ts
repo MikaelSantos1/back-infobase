@@ -5,4 +5,5 @@ export interface ProjectsRepository {
 	findById(id: string): Promise<Project | null>;
 	save(project: Project): Promise<Project>;
 	delete(id: string): Promise<void>;
+	fetchProjects(): Promise<Project[] | []>;
 }

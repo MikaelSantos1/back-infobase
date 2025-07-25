@@ -3,17 +3,21 @@ import { z } from "zod";
 import { makeCreateProjectUseCase } from "@/application/factories/make-create-project-use-case";
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
-	const createGymBodySchema = z.object({
-		name: z.string(),
-	});
+	try {
+		const createProjectBodySchema = z.object({
+			name: z.string(),
+		});
 
-	const { name } = createGymBodySchema.parse(request.body);
+		const { name } = createProjectBodySchema.parse(request.body);
 
-	const createGymUseCase = makeCreateProjectUseCase();
+		const createProjectUseCase = makeCreateProjectUseCase();
 
-	await createGymUseCase.execute({
-		name,
-	});
+		await createProjectUseCase.execute({
+			name,
+		});
 
-	return reply.status(201).send();
+		return reply.status(201).send();
+	} catch (error) {
+		return reply.status(500).send({ message: "Internal Server Error" });
+	}
 }
