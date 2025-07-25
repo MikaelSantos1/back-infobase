@@ -12,11 +12,11 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
 		const createProjectUseCase = makeCreateProjectUseCase();
 
-		await createProjectUseCase.execute({
+		const { project } = await createProjectUseCase.execute({
 			name,
 		});
 
-		return reply.status(201).send();
+		return reply.status(201).send({ project });
 	} catch (error) {
 		return reply.status(500).send({ message: "Internal Server Error" });
 	}

@@ -9,10 +9,7 @@ import { fetchProjects } from "./fetch-projects-controller";
 
 export async function projectRoutes(app: FastifyInstance) {
 	app.addHook("onRequest", jwtAuth);
-	app.get(
-		"/projects",
-		fetchProjects
-	);
+	app.get("/projects", fetchProjects);
 	app.post(
 		"/project",
 		{ preHandler: [verifyUserRole(["ADMIN", "MANAGER"])] },
