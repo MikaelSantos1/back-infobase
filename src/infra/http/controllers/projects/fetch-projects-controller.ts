@@ -1,0 +1,13 @@
+import { makeFetchProjectUseCase } from "@/application/factories/make-fetch-projects-use-case";
+import type { FastifyReply, FastifyRequest } from "fastify";
+import { z } from "zod";
+
+
+export async function fetchProjects(request: FastifyRequest, reply: FastifyReply) {
+	
+	const FetchProjectUseCase = makeFetchProjectUseCase();
+
+	const { projects } = await FetchProjectUseCase.execute();
+
+	return reply.status(200).send({projects});
+}

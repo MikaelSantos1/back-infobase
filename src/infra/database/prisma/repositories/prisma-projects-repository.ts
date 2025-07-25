@@ -3,6 +3,7 @@ import type { ProjectsRepository } from "@/application/repositories/projects-rep
 import { prisma } from "@/infra/lib/prisma";
 
 export class PrismaProjectsRepository implements ProjectsRepository {
+	
 	async findById(id: string): Promise<Project | null> {
 		const project = await prisma.project.findUnique({
 			where: { id },
@@ -27,5 +28,13 @@ export class PrismaProjectsRepository implements ProjectsRepository {
 		await prisma.project.delete({
 			where: { id },
 		});
+	}
+	async fetchProjects(): Promise<Project[] | []> {
+		const projects = await prisma.project.findMany({
+			include:{
+				tasks:true
+			}
+		});
+		return projects;
 	}
 }
