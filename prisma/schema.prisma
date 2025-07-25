@@ -32,11 +32,10 @@ model User {
 }
 
 model Project {
-  id         String    @id @default(uuid())
+  id         String   @id @default(uuid())
   name       String
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   tasks Task[]
 
@@ -44,13 +43,12 @@ model Project {
 }
 
 model Task {
-  id          String     @id @default(uuid())
-  title       String
-  description String?
-  status      TaskStatus @default(PENDING)
-  dueDate     DateTime?
-  created_at  DateTime   @default(now())
-  updated_at  DateTime   @updatedAt
+  id    String @id @default(uuid())
+  title String
+
+  status     TaskStatus @default(IN_PROGRESS)
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
 
   projectId String
   project   Project @relation(fields: [projectId], references: [id])
@@ -59,7 +57,6 @@ model Task {
 }
 
 enum TaskStatus {
-  PENDING
   IN_PROGRESS
   COMPLETED
 }

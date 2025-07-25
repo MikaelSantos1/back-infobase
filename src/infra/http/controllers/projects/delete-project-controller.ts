@@ -8,24 +8,17 @@ export async function deleteProject(
 	request: FastifyRequest,
 	reply: FastifyReply,
 ) {
-	try {
-		const deleteProjectParamsSchema = z.object({
-			projectId: z.string().uuid(),
-		});
+	const deleteProjectParamsSchema = z.object({
+		projectId: z.string().uuid(),
+	});
 
-		const { projectId } = deleteProjectParamsSchema.parse(request.params);
+	const { projectId } = deleteProjectParamsSchema.parse(request.params);
 
-		const deleteProjectUseCase = makeDeleteProjectUseCase();
+	const deleteProjectUseCase = makeDeleteProjectUseCase();
 
-		await deleteProjectUseCase.execute({
-			projectId,
-		});
+	await deleteProjectUseCase.execute({
+		projectId,
+	});
 
-		return reply.status(204).send();
-	} catch (error) {
-		if (error instanceof ResourceNotFoundError) {
-			return reply.status(404).send({ message: "Project not found" });
-		}
-		return reply.status(500).send({ message: "Internal Server Error" });
-	}
+	return reply.status(204).send();
 }
