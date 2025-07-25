@@ -1,25 +1,26 @@
-import { Project } from "@prisma/client";
-import { ProjectsRepository } from "../repositories/projects-repository";
+import type { Project } from "@prisma/client";
+import type { ProjectsRepository } from "../repositories/projects-repository";
 
 interface CreateProjectUseCaseRequest {
-    name: string;
+	name: string;
 }
 
 interface CreateProjectUseCaseResponse {
-  project: Project;
+	project: Project;
 }
 
 export class CreateProjectUseCase {
-  constructor(private projectsRepository: ProjectsRepository) {}
+	constructor(private projectsRepository: ProjectsRepository) {}
 
-  async execute({name}: CreateProjectUseCaseRequest): Promise<CreateProjectUseCaseResponse> {
-    const project = await this.projectsRepository.create({
-      name,
-     
-    });
+	async execute({
+		name,
+	}: CreateProjectUseCaseRequest): Promise<CreateProjectUseCaseResponse> {
+		const project = await this.projectsRepository.create({
+			name,
+		});
 
-    return {
-      project,
-    };
-  }
+		return {
+			project,
+		};
+	}
 }

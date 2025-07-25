@@ -1,33 +1,25 @@
-import type { Project } from "@prisma/client";
 import type { ProjectsRepository } from "../repositories/projects-repository";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 
-interface EditProjectUseCaseRequest {
-	name: string;
+interface DeleteProjectUseCaseRequest {
 	projectId: string;
 }
 
-interface EditProjectUseCaseResponse {
-	project: Project;
-}
+type DeleteProjectUseCaseResponse = {};
 
-export class EditProjectUseCase {
+export class DeleteProjectUseCase {
 	constructor(private projectsRepository: ProjectsRepository) {}
 
 	async execute({
 		projectId,
-		name,
-	}: EditProjectUseCaseRequest): Promise<EditProjectUseCaseResponse> {
+	}: DeleteProjectUseCaseRequest): Promise<DeleteProjectUseCaseResponse> {
 		const project = await this.projectsRepository.findById(projectId);
 		if (!project) {
 			throw new ResourceNotFoundError();
 		}
-		project.name = name;
 
-		await this.projectsRepository.save(project);
+		await this.projectsRepository.delete(project.id);
 
-		return {
-			project,
-		};
+		return {};
 	}
 }
