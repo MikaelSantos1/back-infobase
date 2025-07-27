@@ -1,0 +1,68 @@
+
+# Projeto - Guia de Instalação e Execução
+
+## 1. Clonar o repositório
+
+```bash
+git clone https://github.com/MikaelSantos1/back-infobase.git
+````
+
+## 2. Instalar dependências
+
+Entre na pasta do projeto e instale as dependências:
+
+```bash
+cd back-end
+npm install
+```
+
+## 3. Configurar variáveis de ambiente
+
+Copie o arquivo `.env.example` para `.env`:
+
+```bash
+cp .env.example .env
+```
+
+> **Importante:** 
+
+## 4. Iniciar os serviços com Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+## 5. Gerenciar banco de dados com Prisma
+
+Execute as migrations e a população inicial do banco de dados:
+
+```bash
+npx prisma migrate dev
+npx prisma db seed
+```
+
+
+> **Email:** admin@admin.com
+> **Senha:** 123456
+
+## 6. Executar o projeto localmente
+
+```bash
+npm run dev
+```
+
+## 7. Executar os testes
+
+Para rodar os testes unitários:
+
+```bash
+npm run test
+```
+
+Para rodar os testes end-to-end:
+
+```bash
+npm run test:e2e
+```
+
+
