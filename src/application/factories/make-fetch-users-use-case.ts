@@ -1,8 +1,10 @@
-import { PrismaProjectsRepository } from "@/infra/database/prisma/repositories/prisma-projects-repository";
-import { FetchProjectsUseCase } from "../use-cases/fetch-projects-use-case";
+
+
+import { PrismaUsersRepository } from "@/infra/database/prisma/repositories/prisma-users-repository";
+import { FetchUsersUseCase } from "../use-cases/fetch-users-use-case";
 
 export function makeFetchUsersUseCase() {
-    const prismaProjectRepository = new PrismaProjectsRepository();
-    const fetchProjectUseCase = new FetchProjectsUseCase(prismaProjectRepository);
-    return fetchProjectUseCase;
+    const prismaUsersRepository = new PrismaUsersRepository();
+    const useCase = new FetchUsersUseCase(prismaUsersRepository);
+    return useCase;
 }

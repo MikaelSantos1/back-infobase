@@ -7,6 +7,7 @@ export class PrismaUsersRepository implements UsersRepository {
     const user = await prisma.user.findUnique({
       where: {
         email,
+        is_active: true,
       },
     });
 
@@ -31,7 +32,28 @@ export class PrismaUsersRepository implements UsersRepository {
       },
     });
   }
-  async fetchUsers(): Promise<User[] | []> {
-    return await prisma.user.findMany();
+  async fetchUsers(userId: string): Promise<Omit<User, "password_hash">[]> {
+    return await prisma.user.findMany({
+      select: {
+        name: true,
+        created_at: true,
+        email: true,
+        id: true,
+        is_active: true,
+        role: true,
+      },
+      where: {
+        id: {
+          not: userId,
+        },
+      },
+    });
+  }
+  async save(user: User): Promise<User> {
+    const updatedUser = await prisma.user.update({
+      where: { id: user.id },
+      data: user,
+    });
+    return updatedUser;
   }
 }
