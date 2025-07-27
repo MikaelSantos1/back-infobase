@@ -3,32 +3,35 @@ import type { UsersRepository } from "@/application/repositories/users-repositor
 import { prisma } from "@/infra/lib/prisma";
 
 export class PrismaUsersRepository implements UsersRepository {
-	async findByEmail(email: string) {
-		const user = await prisma.user.findUnique({
-			where: {
-				email,
-			},
-		});
+  async findByEmail(email: string) {
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
 
-		return user;
-	}
+    return user;
+  }
 
-	async create(data: Prisma.UserCreateInput) {
-		const user = await prisma.user.create({
-			data,
-		});
+  async create(data: Prisma.UserCreateInput) {
+    const user = await prisma.user.create({
+      data,
+    });
 
-		return user;
-	}
+    return user;
+  }
 
-	async disable(userId: string): Promise<void> {
-		await prisma.user.update({
-			where: {
-				id: userId,
-			},
-			data: {
-				is_active: false,
-			},
-		});
-	}
+  async disable(userId: string): Promise<void> {
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        is_active: false,
+      },
+    });
+  }
+  async fetchUsers(): Promise<User[] | []> {
+    return await prisma.user.findMany();
+  }
 }

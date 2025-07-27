@@ -10,7 +10,10 @@ import { projectRoutes } from "./infra/http/controllers/projects/routes";
 import { tasksRoutes } from "./infra/http/controllers/tasks/routes";
 export const app = fastify();
 
-app.register(fastifyCors);
+app.register(fastifyCors,{
+	  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+	  origin: '*',
+});
 
 app.register(fastifyJwt, {
 	secret: env.JWT_SECRET,

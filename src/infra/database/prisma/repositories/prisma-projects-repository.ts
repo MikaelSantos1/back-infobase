@@ -31,8 +31,15 @@ export class PrismaProjectsRepository implements ProjectsRepository {
 	async fetchProjects(): Promise<Project[] | []> {
 		const projects = await prisma.project.findMany({
 			include: {
-				tasks: true,
+				tasks: {
+					orderBy:{
+						created_at:'asc'
+					}
+				},
 			},
+			orderBy:{
+				created_at:'asc'
+			}
 		});
 		return projects;
 	}

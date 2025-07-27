@@ -38,6 +38,6 @@ describe("Create user (e2e)", () => {
 				password: "123456",
 			});
 
-		expect(response.statusCode).toEqual(401);
+		expect(response.statusCode).toEqual(403);
 	});
 });

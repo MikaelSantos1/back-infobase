@@ -8,7 +8,7 @@ export function verifyUserRole(
 
 		if (!allowedRoles.includes(role)) {
 			return reply
-				.status(401)
+				.status(403)
 				.send({ message: "user does not have permission" });
 		}
 	};

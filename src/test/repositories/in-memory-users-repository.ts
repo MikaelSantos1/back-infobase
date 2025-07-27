@@ -1,9 +1,9 @@
-import { $Enums, type Prisma, type User } from "@prisma/client";
+import {  type Prisma, type User } from "@prisma/client";
 import { randomUUID } from "crypto";
 import type { UsersRepository } from "@/application/repositories/users-repository";
 
 export class InMemoryUsersRepository implements UsersRepository {
-	public itens: User[] = [];
+	public items: User[] = [];
 	async create(data: Prisma.UserCreateInput) {
 		const user: User = {
 			id: randomUUID(),
@@ -14,11 +14,11 @@ export class InMemoryUsersRepository implements UsersRepository {
 			is_active: true,
 			role: "COLLABORATOR",
 		};
-		this.itens.push(user);
+		this.items.push(user);
 		return user;
 	}
 	async findByEmail(email: string) {
-		const user = this.itens.find((item) => item.email === email);
+		const user = this.items.find((item) => item.email === email);
 		if (!user) {
 			return null;
 		}
@@ -26,12 +26,15 @@ export class InMemoryUsersRepository implements UsersRepository {
 	}
 
 	async disable(userId: string) {
-		const index = this.itens.findIndex((item) => item.id === userId);
+		const index = this.items.findIndex((item) => item.id === userId);
 
-		const user = this.itens[index];
+		const user = this.items[index];
 
 		user.is_active = false;
 
-		this.itens[index] = user;
+		this.items[index] = user;
 	}
+	async fetchUsers(): Promise<User[] | []> {
+			return this.items;
+		}
 }

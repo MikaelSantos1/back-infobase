@@ -4,4 +4,5 @@ export interface UsersRepository {
 	create(data: Prisma.UserCreateInput): Promise<User>;
 	findByEmail(email: string): Promise<User | null>;
 	disable(userId: string): Promise<void>;
+	fetchUsers():Promise<User[] | []>
 }

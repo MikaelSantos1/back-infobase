@@ -37,6 +37,6 @@ describe("Delete Project (e2e)", () => {
 				name: "Project test",
 			});
 
-		expect(response.statusCode).toEqual(401);
+		expect(response.statusCode).toEqual(403);
 	});
 });

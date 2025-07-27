@@ -5,7 +5,7 @@ import { prisma } from "@/infra/lib/prisma";
 
 export async function createAndAuthenticateUser(
 	app: FastifyInstance,
-	role: "ADMIN" | "COLLABORATOR" = "COLLABORATOR",
+	role: "ADMIN" | "COLLABORATOR" | "MANAGER" = "ADMIN",
 ) {
 	const email = `user-${role.toLowerCase()}@test.com`;
 	await prisma.user.create({
