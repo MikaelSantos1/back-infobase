@@ -1,23 +1,23 @@
 import type { User } from "@prisma/client";
-import { UsersRepository } from "../repositories/users-repository";
-
+import type { UsersRepository } from "../repositories/users-repository";
 
 interface FetchUsersUseCaseResponse {
-    users: Omit<User, "password_hash">[]
+	users: Omit<User, "password_hash">[];
 }
-interface FetchUsersUseCaseRequest{
-    userId?:string
+interface FetchUsersUseCaseRequest {
+	userId?: string;
 }
 
 export class FetchUsersUseCase {
-    constructor(private usersRepository: UsersRepository) {}
+	constructor(private usersRepository: UsersRepository) {}
 
-    async execute({userId}:FetchUsersUseCaseRequest): Promise<FetchUsersUseCaseResponse> {
-       
-        const users = await this.usersRepository.fetchUsers(userId)
+	async execute({
+		userId,
+	}: FetchUsersUseCaseRequest): Promise<FetchUsersUseCaseResponse> {
+		const users = await this.usersRepository.fetchUsers(userId);
 
-        return {
-            users: users,
-        };
-    }
+		return {
+			users: users,
+		};
+	}
 }

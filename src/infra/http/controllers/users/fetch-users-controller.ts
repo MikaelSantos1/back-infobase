@@ -4,10 +4,10 @@ import { makeFetchProjectUseCase } from "@/application/factories/make-fetch-proj
 import { makeFetchUsersUseCase } from "@/application/factories/make-fetch-users-use-case";
 
 export async function fetchUsers(request: FastifyRequest, reply: FastifyReply) {
-  const fetchUsersUseCase = makeFetchUsersUseCase();
-  const userId = request.user.sub;
+	const fetchUsersUseCase = makeFetchUsersUseCase();
+	const userId = request.user.sub;
 
-  const { users } = await fetchUsersUseCase.execute({userId});
+	const { users } = await fetchUsersUseCase.execute({ userId });
 
-  return reply.status(200).send({ users });
+	return reply.status(200).send({ users });
 }

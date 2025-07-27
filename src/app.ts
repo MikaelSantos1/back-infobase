@@ -10,9 +10,9 @@ import { projectRoutes } from "./infra/http/controllers/projects/routes";
 import { tasksRoutes } from "./infra/http/controllers/tasks/routes";
 export const app = fastify();
 
-app.register(fastifyCors,{
-	  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-	  origin: '*',
+app.register(fastifyCors, {
+	methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+	origin: "*",
 });
 
 app.register(fastifyJwt, {
@@ -38,7 +38,6 @@ app.setErrorHandler((error, _, reply) => {
 	if (env.NODE_ENV !== "production") {
 		console.error(error);
 	} else {
-		
 	}
 
 	return reply.status(500).send({ message: "Internal server error." });

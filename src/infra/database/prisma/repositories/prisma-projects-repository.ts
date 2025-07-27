@@ -32,14 +32,14 @@ export class PrismaProjectsRepository implements ProjectsRepository {
 		const projects = await prisma.project.findMany({
 			include: {
 				tasks: {
-					orderBy:{
-						created_at:'asc'
-					}
+					orderBy: {
+						created_at: "asc",
+					},
 				},
 			},
-			orderBy:{
-				created_at:'asc'
-			}
+			orderBy: {
+				created_at: "asc",
+			},
 		});
 		return projects;
 	}

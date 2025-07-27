@@ -1,14 +1,13 @@
-
-import { UsersRepository } from "../repositories/users-repository";
+import type { UsersRepository } from "../repositories/users-repository";
 
 interface UserUseCaseRequest {
-  userId: string;
+	userId: string;
 }
 
 export class DisableUserUseCase {
-  constructor(private usersRepository: UsersRepository) {}
+	constructor(private usersRepository: UsersRepository) {}
 
-  async execute({ userId }: UserUseCaseRequest): Promise<void> {
-    await this.usersRepository.disable(userId);
-  }
+	async execute({ userId }: UserUseCaseRequest): Promise<void> {
+		await this.usersRepository.disable(userId);
+	}
 }

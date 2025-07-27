@@ -8,7 +8,7 @@ interface CreateUserUseCaseParams {
 	email: string;
 	password: string;
 	role: "ADMIN" | "MANAGER" | "COLLABORATOR";
-	is_active?:boolean
+	is_active?: boolean;
 }
 
 interface CreateUserUseCaseResponse {
@@ -22,7 +22,7 @@ export class CreateUserUseCase {
 		name,
 		password,
 		role,
-		is_active
+		is_active,
 	}: CreateUserUseCaseParams): Promise<CreateUserUseCaseResponse> {
 		const password_hash = await hash(password, 6);
 		const usersWithSameEmail = await this.usersRepository.findByEmail(email);
@@ -36,7 +36,7 @@ export class CreateUserUseCase {
 			email,
 			password_hash,
 			role,
-			is_active
+			is_active,
 		});
 
 		return {

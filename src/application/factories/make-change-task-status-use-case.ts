@@ -4,11 +4,7 @@ import { PrismaTasksRepository } from "@/infra/database/prisma/repositories/pris
 import { ChangeTaskStatusUseCase } from "../use-cases/change-task-status-use-case";
 
 export function makeChangeTaskStatusUseCase() {
-
-    const prismaTaskRepository = new PrismaTasksRepository();
-    const useCase = new ChangeTaskStatusUseCase(
-        prismaTaskRepository,
-       
-    );
-    return useCase;
+	const prismaTaskRepository = new PrismaTasksRepository();
+	const useCase = new ChangeTaskStatusUseCase(prismaTaskRepository);
+	return useCase;
 }

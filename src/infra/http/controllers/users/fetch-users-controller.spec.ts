@@ -15,13 +15,11 @@ describe("Fetch users (e2e)", () => {
 
 	it("should be able to fetch users", async () => {
 		const { token } = await createAndAuthenticateUser(app, "COLLABORATOR");
-	
 
 		const response = await request(app.server)
 			.get(`/users`)
 			.set("Authorization", `Bearer ${token}`);
 
-	
 		expect(response.statusCode).toEqual(200);
 	});
 });

@@ -1,9 +1,9 @@
 import { hash } from "bcryptjs";
-import { prisma } from "@/infra/lib/prisma";
 import { randomUUID } from "crypto";
+import { prisma } from "@/infra/lib/prisma";
 
 export async function makeUser() {
-	const email = `user-test-${randomUUID()}@example.com`
+	const email = `user-test-${randomUUID()}@example.com`;
 	const user = await prisma.user.create({
 		data: {
 			name: "user-test",
